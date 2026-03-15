@@ -1,26 +1,45 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+	--font-mono: var(--font-jetbrains-mono);
+	--font-sans: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji",
+		"Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+	--default-font-family: var(--font-sans);
+	--default-mono-font-family: var(--font-mono);
+
+	--color-bg-page: #0c0c0c;
+	--color-bg-surface: #171717;
+	--color-bg-elevated: #1a1a1a;
+	--color-bg-input: #111111;
+
+	--color-border-primary: #1f1f1f;
+	--color-border-secondary: #252525;
+	--color-border-focus: #10b981;
+
+	--color-text-primary: #e5e5e5;
+	--color-text-secondary: #a3a3a3;
+	--color-text-tertiary: #737373;
+	--color-text-muted: #525252;
+
+	--color-accent-green: #10b981;
+	--color-accent-amber: #f59e0b;
+	--color-accent-red: #ef4444;
+	--color-accent-cyan: #06b6d4;
+	--color-accent-blue: #3b82f6;
+	--color-accent-orange: #f97316;
+	--color-green-primary: #22c55e;
+
+	--color-destructive: #d93c15;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
+@theme {
+	--radius-none: 0px;
+	--radius-m: 16px;
+	--radius-pill: 999px;
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+	--spacing-xs: 4px;
+	--spacing-sm: 8px;
+	--spacing-md: 16px;
+	--spacing-lg: 24px;
+	--spacing-xl: 40px;
 }
