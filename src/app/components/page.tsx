@@ -4,9 +4,19 @@ import { Toggle } from "@/components/ui/toggle";
 import { CodeBlock } from "@/components/ui/code-block";
 import { Navbar } from "@/components/ui/navbar";
 import { DiffLine } from "@/components/ui/diff-line";
-import { AnalysisCard } from "@/components/ui/analysis-card";
+import {
+	AnalysisCard,
+	AnalysisCardTitle,
+	AnalysisCardDescription,
+} from "@/components/ui/analysis-card";
 import { ScoreRing } from "@/components/ui/score-ring";
-import { LeaderboardRow } from "@/components/ui/leaderboard-row";
+import {
+	LeaderboardRow,
+	LeaderboardRowRank,
+	LeaderboardRowScore,
+	LeaderboardRowCode,
+	LeaderboardRowLanguage,
+} from "@/components/ui/leaderboard-row";
 
 const variants = ["primary", "secondary", "ghost", "destructive", "link"] as const;
 const sizes = ["sm", "md", "lg"] as const;
@@ -178,11 +188,18 @@ export default async function ComponentsPage() {
 
 					<div className="flex flex-col gap-3">
 						<span className="text-xs text-text-tertiary">critical</span>
-						<AnalysisCard
-							status="critical"
-							title="using var instead of const/let"
-							description="the var keyword is function-scoped rather than block-scoped, which can lead to unexpected behavior and bugs. modern javascript uses const for immutable bindings and let for mutable ones."
-						/>
+						<AnalysisCard>
+							<Badge status="critical">critical</Badge>
+							<AnalysisCardTitle>
+								using var instead of const/let
+							</AnalysisCardTitle>
+							<AnalysisCardDescription>
+								the var keyword is function-scoped rather than
+								block-scoped, which can lead to unexpected behavior
+								and bugs. modern javascript uses const for immutable
+								bindings and let for mutable ones.
+							</AnalysisCardDescription>
+						</AnalysisCard>
 					</div>
 				</section>
 
@@ -201,24 +218,42 @@ export default async function ComponentsPage() {
 					<div className="flex flex-col gap-3">
 						<span className="text-xs text-text-tertiary">example</span>
 						<div className="overflow-hidden rounded border border-border-primary">
-							<LeaderboardRow
-								rank={1}
-								score={2.1}
-								codePreview="function calculateTotal(items) { var total = 0; ..."
-								language="javascript"
-							/>
-							<LeaderboardRow
-								rank={2}
-								score={4.7}
-								codePreview="async function fetchData() { const res = await fetch(url); ..."
-								language="typescript"
-							/>
-							<LeaderboardRow
-								rank={3}
-								score={6.3}
-								codePreview="def process_data(items): return [x for x in items if x > 0]"
-								language="python"
-							/>
+							<LeaderboardRow>
+								<LeaderboardRowRank>#{1}</LeaderboardRowRank>
+								<LeaderboardRowScore>
+									{(2.1).toFixed(1)}
+								</LeaderboardRowScore>
+								<LeaderboardRowCode>
+									{"function calculateTotal(items) { var total = 0; ..."}
+								</LeaderboardRowCode>
+								<LeaderboardRowLanguage>
+									javascript
+								</LeaderboardRowLanguage>
+							</LeaderboardRow>
+							<LeaderboardRow>
+								<LeaderboardRowRank>#{2}</LeaderboardRowRank>
+								<LeaderboardRowScore>
+									{(4.7).toFixed(1)}
+								</LeaderboardRowScore>
+								<LeaderboardRowCode>
+									{"async function fetchData() { const res = await fetch(url); ..."}
+								</LeaderboardRowCode>
+								<LeaderboardRowLanguage>
+									typescript
+								</LeaderboardRowLanguage>
+							</LeaderboardRow>
+							<LeaderboardRow>
+								<LeaderboardRowRank>#{3}</LeaderboardRowRank>
+								<LeaderboardRowScore>
+									{(6.3).toFixed(1)}
+								</LeaderboardRowScore>
+								<LeaderboardRowCode>
+									{"def process_data(items): return [x for x in items if x > 0]"}
+								</LeaderboardRowCode>
+								<LeaderboardRowLanguage>
+									python
+								</LeaderboardRowLanguage>
+							</LeaderboardRow>
 						</div>
 					</div>
 				</section>

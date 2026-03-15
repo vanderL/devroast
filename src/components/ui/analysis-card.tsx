@@ -1,6 +1,5 @@
 import { type ComponentProps, forwardRef } from "react";
 import { tv, type VariantProps } from "tailwind-variants";
-import { Badge, type BadgeVariants } from "./badge";
 
 const analysisCardVariants = tv({
 	base: "flex w-[480px] flex-col gap-3 rounded border border-border-primary p-5",
@@ -8,28 +7,17 @@ const analysisCardVariants = tv({
 
 type AnalysisCardVariants = VariantProps<typeof analysisCardVariants>;
 
-type AnalysisCardProps = ComponentProps<"div"> &
-	AnalysisCardVariants & {
-		status: NonNullable<BadgeVariants["status"]>;
-		title: string;
-		description: string;
-	};
+type AnalysisCardProps = ComponentProps<"div"> & AnalysisCardVariants;
 
 const AnalysisCard = forwardRef<HTMLDivElement, AnalysisCardProps>(
-	({ className, status, title, description, ...props }, ref) => {
+	({ className, children, ...props }, ref) => {
 		return (
 			<div
 				ref={ref}
 				className={analysisCardVariants({ className })}
 				{...props}
 			>
-				<Badge status={status}>{status}</Badge>
-				<span className="font-mono text-[13px] text-text-primary">
-					{title}
-				</span>
-				<p className="font-mono text-xs leading-6 text-text-secondary">
-					{description}
-				</p>
+				{children}
 			</div>
 		);
 	},
@@ -37,9 +25,58 @@ const AnalysisCard = forwardRef<HTMLDivElement, AnalysisCardProps>(
 
 AnalysisCard.displayName = "AnalysisCard";
 
+const analysisCardTitleVariants = tv({
+	base: "font-mono text-[13px] text-text-primary",
+});
+
+type AnalysisCardTitleProps = ComponentProps<"span"> &
+	VariantProps<typeof analysisCardTitleVariants>;
+
+const AnalysisCardTitle = forwardRef<HTMLSpanElement, AnalysisCardTitleProps>(
+	({ className, children, ...props }, ref) => (
+		<span
+			ref={ref}
+			className={analysisCardTitleVariants({ className })}
+			{...props}
+		>
+			{children}
+		</span>
+	),
+);
+
+AnalysisCardTitle.displayName = "AnalysisCardTitle";
+
+const analysisCardDescriptionVariants = tv({
+	base: "font-mono text-xs leading-6 text-text-secondary",
+});
+
+type AnalysisCardDescriptionProps = ComponentProps<"p"> &
+	VariantProps<typeof analysisCardDescriptionVariants>;
+
+const AnalysisCardDescription = forwardRef<
+	HTMLParagraphElement,
+	AnalysisCardDescriptionProps
+>(({ className, children, ...props }, ref) => (
+	<p
+		ref={ref}
+		className={analysisCardDescriptionVariants({ className })}
+		{...props}
+	>
+		{children}
+	</p>
+));
+
+AnalysisCardDescription.displayName = "AnalysisCardDescription";
+
 export {
 	AnalysisCard,
 	analysisCardVariants,
 	type AnalysisCardProps,
 	type AnalysisCardVariants,
+	AnalysisCardTitle,
+	analysisCardTitleVariants,
+	type AnalysisCardTitleProps,
+	AnalysisCardDescription,
+	analysisCardDescriptionVariants,
+	type AnalysisCardDescriptionProps,
 };
